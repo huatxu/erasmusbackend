@@ -1,0 +1,1 @@
+web: gunicorn erasmusbackend.wsgi

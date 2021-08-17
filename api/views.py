@@ -49,12 +49,17 @@ class CervezaList(APIView):
         return Response({"titulos": titulosSerializer.data, "cervezas": serializer.data})
 
 
+import csv
+import os
 
 def cast_bool(entry):
-    if not entry:
+    try:
+        if not entry:
+            return False
+        trues = ['sí', 'si']
+        return entry.lower() in trues
+    except Exception:
         return False
-    trues = ['sí', 'si']
-    return entry.lower() in trues
 
 def cast_price(entry):
     result = entry
@@ -66,12 +71,12 @@ def cast_price(entry):
     return 0.0
 
 def load_csv():
-    # Comida = apps.get_model("api", 'Comida')
+
     with open(f'{os.path.dirname(os.path.abspath(__file__))}/carta-cervezas.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             try:
-                cerveza = Cerveza(
+                cerveza = Cerveza.objects.create(
                     nombre=row['Nombre'],
                     estilo = row['Estilo'],
                     pais = row['País'],
@@ -96,7 +101,38 @@ def load_csv():
                     aparece	= cast_bool(row['Aparece']),
                     barril = cast_bool(row['Barril'])
                 )
-                print(cast_bool(row['Sin gluten']))
                 cerveza.save()
             except Exception:
+                pass
+
+    with open(f'{os.path.dirname(os.path.abspath(__file__))}/carta-comida.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            try:
+                comida = Comida.objects.create(
+                    nombre=row['Nombre'],
+                    nombre_ingles=row['Nombre ingles'],
+                    descripcion=row['Descripcion'],
+                    descripcion_ingles=row['Descripcion ingles'],
+                    tipo=row['Tipo'],
+                    precio=cast_price(row['Precio']),
+                    precio_2=cast_price(row['precio 2']),
+                    altramuces=cast_bool(row['Altramuces']),
+                    apio=cast_bool(row['Apio']),
+                    cacahuete=cast_bool(row['Cacahuete']),
+                    crustaceo=cast_bool(row['Crustaceo']),
+                    gluten=cast_bool(row['Gluten']),
+                    huevo=cast_bool(row['Huevo']),
+                    lacteos=cast_bool(row['Lacteos']),
+                    moluscos=cast_bool(row['Moluscos']),
+                    mostaza=cast_bool(row['Mostaza']),
+                    nueces=cast_bool(row['Nueces']),
+                    pescado=cast_bool(row['Pescado']),
+                    sesamo=cast_bool(row['Sesamo']),
+                    soja=cast_bool(row['Soja']),
+                    sulfitos=cast_bool(row['Sulfitos']),
+                    disponible=cast_bool(row['Disponible'])
+                )
+                comida.save()
+            except Exception as exc:
                 pass

@@ -3,13 +3,14 @@ from django.contrib import admin
 from api.models import Cerveza, Comida, Titulo
 
 class CervezaAdmin(admin.ModelAdmin):
-    pass
-
+    list_display = ('id','nombre')
+    search_fields = ('nombre',)
 class ComidaAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id','nombre')
+    search_fields = ('nombre',)
 
 class TituloAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('titulo_1',)
 
 
 admin.site.register(Cerveza, CervezaAdmin)

@@ -137,5 +137,9 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+
+LANGUAGE_CODE = 'es'  # or other appropriate code
+USE_I18N = True
+USE_L10N = True
 # Activate Django-Heroku.
 django_heroku.settings(locals())

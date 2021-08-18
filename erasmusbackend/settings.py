@@ -30,6 +30,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'corsheaders',
 
     'api'
 ]
@@ -143,3 +145,5 @@ USE_I18N = True
 USE_L10N = True
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+CORS_ALLOW_ALL_ORIGINS = True

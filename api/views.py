@@ -28,7 +28,7 @@ class ComidaList(APIView):
 class ComidaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comida
-        fields = ['id', 'nombre', 'nombre_ingles', 'descripcion', 'descipcion_ingles', 'tipo', 'precio', 'precio_2', 'altramuces', 'apio', 'cacahuete', 'crustaceo', 'gluten', 'huevo', 'lacteos', 'moluscos', 'mostaza', 'nueces', 'pescado', 'sesamo', 'soja', 'sulfitos', 'disponible']
+        fields = ['id', 'nombre', 'nombre_ingles', 'descripcion', 'descripcion_ingles', 'tipo', 'precio', 'precio_2', 'altramuces', 'apio', 'cacahuete', 'crustaceo', 'gluten', 'huevo', 'lacteos', 'moluscos', 'mostaza', 'nueces', 'pescado', 'sesamo', 'soja', 'sulfitos', 'disponible']
 
 
 class TituloSerializer(serializers.ModelSerializer):

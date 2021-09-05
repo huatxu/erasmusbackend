@@ -25,12 +25,20 @@ class Cerveza(models.Model):
     aparece	= models.BooleanField()
     barril = models.BooleanField()
 
+class TipoComida(models.Model):
+    nombre = models.CharField(max_length=255)
+    nombre_ingles = models.CharField(max_length=255)
+    orden = models.IntegerField(default=0)
+    class Meta:
+        verbose_name_plural = "Comidas"
+        verbose_name = "Familia de comidas"
+
 class Comida(models.Model):
     nombre = models.CharField(max_length=255)
     nombre_ingles = models.CharField(max_length=255)
     descripcion = models.CharField(null=True, blank=True, max_length=1024)
     descripcion_ingles = models.CharField(null=True, blank=True, max_length=1024)
-    tipo = models.CharField(max_length=255)
+    tipo = models.ForeignKey(TipoComida, on_delete=models.CASCADE)
     precio = models.DecimalField(decimal_places=2, max_digits=12)
     precio_2 = models.DecimalField(decimal_places=2, max_digits=12)
     altramuces = models.BooleanField()

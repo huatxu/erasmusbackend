@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from api.models import Cerveza, Comida, Titulo
+from api.models import Cerveza, Comida, Titulo, TipoComida
 
 class CervezaAdmin(admin.ModelAdmin):
     list_display = ('id','nombre', 'tipo', 'disponible', 'barril', 'precio', 'precio_2', 'precio_3')
@@ -17,6 +17,13 @@ class ComidaAdmin(admin.ModelAdmin):
 class TituloAdmin(admin.ModelAdmin):
     list_display = ('titulo_1',)
 
+
+class TipoComidaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'nombre_ingles', 'orden')
+    list_editable = ('orden',)
+
+
+admin.site.register(TipoComida, TipoComidaAdmin)
 
 admin.site.register(Cerveza, CervezaAdmin)
 

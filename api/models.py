@@ -30,8 +30,11 @@ class TipoComida(models.Model):
     nombre_ingles = models.CharField(max_length=255)
     orden = models.IntegerField(default=0)
     class Meta:
-        verbose_name_plural = "Comidas"
-        verbose_name = "Familia de comidas"
+        verbose_name_plural = "Familias de Comida"
+        verbose_name = "Familia de comida"
+
+    def __str__(self):
+        return self.nombre
 
 class Comida(models.Model):
     nombre = models.CharField(max_length=255)

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 
-from api.models import Comida, Cerveza, Titulo
+from api.models import Comida, Cerveza, Titulo, TipoComida
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -20,16 +20,20 @@ class ComidaList(APIView):
     List all snippets, or create a new snippet.
     """
     def get(self, request, format=None):
-        comidas = Comida.objects.all()
+        comidas = Comida.objects.all().order_by('tipo__orden', 'nombre')
         serializer = ComidaSerializer(comidas, many=True)
         return Response(serializer.data)
 
 
 class ComidaSerializer(serializers.ModelSerializer):
+    tipo = serializers.SerializerMethodField('get_tipo')
+
+    def get_tipo(self, obj):
+        return obj.tipo.nombre + '-' + obj.tipo.nombre_ingles
+
     class Meta:
         model = Comida
-        fields = ['id', 'nombre', 'nombre_ingles', 'descripcion', 'descripcion_ingles', 'tipo', 'precio', 'precio_2', 'altramuces', 'apio', 'cacahuete', 'crustaceo', 'gluten', 'huevo', 'lacteos', 'moluscos', 'mostaza', 'nueces', 'pescado', 'sesamo', 'soja', 'sulfitos', 'disponible']
-
+        fields = ('id', 'nombre', 'nombre_ingles', 'descripcion', 'descripcion_ingles', 'tipo', 'precio', 'precio_2', 'altramuces', 'apio', 'cacahuete', 'crustaceo', 'gluten', 'huevo', 'lacteos', 'moluscos', 'mostaza', 'nueces', 'pescado', 'sesamo', 'soja', 'sulfitos', 'disponible')
 
 class TituloSerializer(serializers.ModelSerializer):
     class Meta:

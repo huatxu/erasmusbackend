@@ -9,18 +9,18 @@ class CervezaAdmin(admin.ModelAdmin):
     list_editable = ('disponible',)
 
 class ComidaAdmin(admin.ModelAdmin):
-    list_display = ('id','nombre', 'tipo', 'disponible', 'precio', 'precio_2')
+    list_display = ('id','nombre', 'tipo', 'disponible', 'precio', 'precio_2', 'orden')
     search_fields = ('nombre',)
     list_filter = ('tipo','disponible',)
-    list_editable = ('disponible', )
+    list_editable = ('disponible','orden')
 
 class TituloAdmin(admin.ModelAdmin):
     list_display = ('titulo_1',)
 
 
 class TipoComidaAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'nombre_ingles', 'orden')
-    list_editable = ('orden',)
+    list_display = ('nombre', 'nombre_ingles', 'orden', 'aparece')
+    list_editable = ('orden', 'aparece')
 
 
 admin.site.register(TipoComida, TipoComidaAdmin)

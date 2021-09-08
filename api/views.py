@@ -20,7 +20,7 @@ class ComidaList(APIView):
     List all snippets, or create a new snippet.
     """
     def get(self, request, format=None):
-        comidas = Comida.objects.all().order_by('tipo__orden', 'nombre')
+        comidas = Comida.objects.filter(disponible=True, tipo__aparece=True).order_by('tipo__orden', 'orden', 'nombre')
         serializer = ComidaSerializer(comidas, many=True)
         return Response(serializer.data)
 
